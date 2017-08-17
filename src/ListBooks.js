@@ -4,17 +4,16 @@ import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
-class ListBooks extends Component{
-    static propTypes = {
-
-    };
+class ListBooks extends Component {
+    static propTypes = {};
 
     state = {
         query: ''
     };
 
-    render(){
-        return(
+    render() {
+        const books = this.props.books;
+        return (
             <div className="list-books">
                 <div className="list-books-title">
                     <h1>MyReads</h1>
@@ -212,10 +211,6 @@ class ListBooks extends Component{
             </div>
         );
     }
-
-
-
-
-
-
 }
+
+export default ListBooks
