@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Book from './Book'
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 
 
 class ListBooks extends Component {
@@ -32,7 +33,7 @@ class ListBooks extends Component {
                                 <div className="bookshelf-books">
                                     <ol className="books-grid">
                                         {bookShelf[shelf].map((book) =>
-                                            <Book book={book} updateShelf={updateShelf}/>
+                                            <Book key={book.id} book={book} updateShelf={updateShelf}/>
                                         )}
                                     </ol>
                                 </div>
@@ -41,7 +42,7 @@ class ListBooks extends Component {
                     </div>
                 </div>
                 <div className="open-search">
-                    <a onClick={() => this.setState({showSearchPage: true})}>Add a book</a>
+                    <Link to="/search">Add a book</Link>
                 </div>
             </div>
         )

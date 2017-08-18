@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom'
 import ListBooks from './ListBooks'
+import SearchBook from './SearchBook'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
     state = {
         /**
          * TODO: Instead of using this state variable to keep track of which page
@@ -14,7 +15,8 @@ class BooksApp extends React.Component {
          * pages, as well as provide a good URL they can bookmark and share.
          */
         showSearchPage: false,
-        books: []
+        books: [],
+        searchBooks: []
     };
 
     componentDidMount() {
@@ -33,12 +35,29 @@ class BooksApp extends React.Component {
 
     });
 
+    searchBook = ((query) => {
+        if(!query.trim()){
+            this.setState({searchBooks: []});
+        }
+        else {
+            BooksAPI.search(query).then((books) => {
+                this.setState({searchBooks: books});
+            });
+        }
+    });
+
 
     render() {
         return (
             <div className="app">
                 <Route exact path="/" render={() => <ListBooks books={this.state.books}
                                                                updateShelf={this.updateShelf}/>}/>
+                <Route exact path="/search" render={({history}) =>
+                    <SearchBook
+                    books={this.state.searchBooks}
+                    onSearchBook={this.searchBook}
+                    updateShelf={this.updateShelf}
+                    />}/>
             </div>
         )
     }
