@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom'
 import ListBooks from './ListBooks'
-import SearchBook from './SearchBook'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+
 
 class BooksApp extends React.Component {
     state = {
@@ -35,11 +35,6 @@ class BooksApp extends React.Component {
 
 
     render() {
-
-        const currentlyReadingBooks = this.state.books.filter((book) => book.shelf === 'currentlyReading');
-        const readBooks = this.state.books.filter((book) => book.shelf === 'read');
-        const wantToReadBooks = this.state.books.filter((book) => book.shelf === 'wantToRead');
-
         return (
             <div className="app">
                 <Route exact path="/" render={() => <ListBooks books={this.state.books}
