@@ -36,15 +36,21 @@ class BooksApp extends Component {
     });
 
     searchBook = ((query) => {
-        if(!query.trim()){
-            this.setState({searchBooks: []});
+            if (!query || !query.trim()) {
+                this.setState({searchBooks: []});
+            }
+            else {
+                BooksAPI.search(query).then((books) => {
+                    console.log(books);
+                    if (typeof books.error === 'undefined') {
+                        this.setState({searchBooks: books});
+                    }
+                    else
+                        this.setState({searchBooks: []});
+                });
+            }
         }
-        else {
-            BooksAPI.search(query).then((books) => {
-                this.setState({searchBooks: books});
-            });
-        }
-    });
+    );
 
 
     render() {
@@ -54,9 +60,12 @@ class BooksApp extends Component {
                                                                updateShelf={this.updateShelf}/>}/>
                 <Route exact path="/search" render={({history}) =>
                     <SearchBook
-                    books={this.state.searchBooks}
-                    onSearchBook={this.searchBook}
-                    updateShelf={this.updateShelf}
+                        books={this.state.searchBooks}
+                        onSearchBook={this.searchBook}
+                        updateShelf={(book, shelf) => {
+                            this.updateShelf(book, shelf);
+                            history.push('/');
+                        }}
                     />}/>
             </div>
         )
