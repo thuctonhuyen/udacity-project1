@@ -3,7 +3,6 @@ import Book from './Book'
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
 
-
 class ListBooks extends Component {
     static propTypes = {
         books: PropTypes.array.isRequired,
@@ -33,7 +32,7 @@ class ListBooks extends Component {
                                 <div className="bookshelf-books">
                                     <ol className="books-grid">
                                         {bookShelf[shelf].map((book) =>
-                                            <Book key={book.id} book={book} updateShelf={updateShelf}/>
+                                            <Book key={book.id} book={book} index={index} updateShelf={updateShelf}/>
                                         )}
                                     </ol>
                                 </div>
