@@ -9,7 +9,6 @@ class Book extends Component {
 
     render() {
         const {book, index, updateShelf} = this.props;
-        const source = (typeof this.props.source === 'undefined' ? '' : this.props.source);
         return (
             <li>
                 <div className="book">
@@ -21,7 +20,7 @@ class Book extends Component {
                         }}></div>
                         <div className="book-shelf-changer">
                             <select value={book.shelf ? book.shelf : 'none'}
-                                    onChange={(e) => updateShelf(book, e.target.value, source, index)}>
+                                    onChange={(e) => updateShelf(book, e.target.value, index)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading
                                 </option>
